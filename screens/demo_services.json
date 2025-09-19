@@ -1,16 +1,65 @@
 {
-  "id": "DEMO_SERVICES",
-  "title": "Our Services",
+  "terminal": true,
+  "id": "SERVICES",
+  "title": "Demo Foundation",
   "data": {
-    "service_list": ["Consulting", "Workshops", "Training"]
+    "main_choice_arr": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "metadata": { "type": "string" }
+        }
+      },
+      "__example__": [
+        {
+          "id": "1",
+          "title": "Yoga Sessions",
+          "description": "Join relaxing yoga classes for beginners",
+          "metadata": "service_yoga"
+        },
+        {
+          "id": "2",
+          "title": "Meditation Workshop",
+          "description": "Learn guided meditation techniques",
+          "metadata": "service_meditation"
+        },
+        {
+          "id": "3",
+          "title": "Nutrition Guidance",
+          "description": "Get diet and wellness advice",
+          "metadata": "service_nutrition"
+        }
+      ]
+    }
   },
   "layout": {
-    "type": "single_select",
-    "label": "Choose a service",
-    "options": [
-      { "label": "Consulting", "value": "consulting" },
-      { "label": "Workshops", "value": "workshops" },
-      { "label": "Training", "value": "training" }
+    "type": "SingleColumnLayout",
+    "children": [
+      {
+        "type": "TextHeading",
+        "text": "Welcome to Demo Foundation ✨"
+      },
+      {
+        "type": "RadioButtonsGroup",
+        "name": "service_name",
+        "label": "Choose a demo option 👇",
+        "required": true,
+        "data-source": "${data.main_choice_arr}"
+      },
+      {
+        "type": "Footer",
+        "label": "Continue",
+        "on-click-action": {
+          "name": "data_exchange",
+          "payload": {
+            "selected_service": "${form.service_name}"
+          }
+        }
+      }
     ]
   }
 }

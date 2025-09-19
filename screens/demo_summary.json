@@ -1,11 +1,65 @@
 {
-  "id": "DEMO_SUMMARY",
-  "title": "Summary",
+  "id": "SUMMARY",
+  "title": "Demo Summary",
+  "terminal": true,
+  "success": true,
   "data": {
-    "message": "Thank you for selecting a service!"
+    "summary_arr": {
+      "type": "array",
+      "items": { "type": "string" },
+      "__example__": [
+        "Service: Yoga Sessions",
+        "Guide: Priya Sharma",
+        "Session: Morning Yoga - 7 AM",
+        "Date: Oct 15, 2025",
+        "Duration: 60 mins",
+        "Price: INR 499",
+        "Availability: Every Monday & Wednesday",
+        "Payment Link: [Click Here](https://rzp.io/l/DemoYoga)"
+      ]
+    },
+    "selections": {
+      "type": "object",
+      "properties": {
+        "Service": { "type": "string" },
+        "Guide": { "type": "string" },
+        "Session": { "type": "string" },
+        "Date": { "type": ["string", "null"] },
+        "Duration": { "type": "string" },
+        "Price": { "type": "string" },
+        "Availability": { "type": "string" },
+        "Payment Link": { "type": "string" }
+      },
+      "__example__": {
+        "Service": "Yoga Sessions",
+        "Guide": "Priya Sharma",
+        "Session": "Morning Yoga - 7 AM",
+        "Date": "2025-10-15",
+        "Duration": "60 mins",
+        "Price": "INR 499",
+        "Availability": "Every Monday & Wednesday",
+        "Payment Link": "[Click Here](https://rzp.io/l/DemoYoga)"
+      }
+    }
   },
   "layout": {
-    "type": "text",
-    "text": "Your selection has been recorded."
+    "type": "SingleColumnLayout",
+    "children": [
+      {
+        "type": "RichText",
+        "text": "${data.summary_arr}"
+      },
+      {
+        "type": "Footer",
+        "label": "Submit",
+        "on-click-action": {
+          "name": "data_exchange",
+          "payload": {
+            "selected_service": "${screen.SERVICES.form.service_name}",
+            "selections": "${data.selections}"
+          }
+        }
+      }
+    ]
   }
 }

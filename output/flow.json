@@ -1,44 +1,169 @@
 {
-  "version": "3.11",
+  "version": "7.2",
   "data_api_version": "3.0",
   "routing_model": {
-    "START_SCREEN": "DEMO_SERVICES"
+    "SERVICES": [
+      "SUMMARY"
+    ]
   },
   "screens": [
     {
-      "id": "DEMO_SERVICES",
-      "title": "Our Services",
+      "terminal": true,
+      "id": "SERVICES",
+      "title": "Demo Foundation",
       "data": {
-        "service_list": ["Consulting", "Workshops", "Training"]
+        "main_choice_arr": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "metadata": {
+                "type": "string"
+              }
+            }
+          },
+          "__example__": [
+            {
+              "id": "1",
+              "title": "Yoga Sessions",
+              "description": "Join relaxing yoga classes for beginners",
+              "metadata": "service_yoga"
+            },
+            {
+              "id": "2",
+              "title": "Meditation Workshop",
+              "description": "Learn guided meditation techniques",
+              "metadata": "service_meditation"
+            },
+            {
+              "id": "3",
+              "title": "Nutrition Guidance",
+              "description": "Get diet and wellness advice",
+              "metadata": "service_nutrition"
+            }
+          ]
+        }
       },
       "layout": {
-        "type": "single_select",
-        "label": "Choose a service",
-        "options": [
+        "type": "SingleColumnLayout",
+        "children": [
           {
-            "label": "Consulting",
-            "value": "consulting"
+            "type": "TextHeading",
+            "text": "Welcome to Demo Foundation ✨"
           },
           {
-            "label": "Workshops",
-            "value": "workshops"
+            "type": "RadioButtonsGroup",
+            "name": "service_name",
+            "label": "Choose a demo option 👇",
+            "required": true,
+            "data-source": "${data.main_choice_arr}"
           },
           {
-            "label": "Training",
-            "value": "training"
+            "type": "Footer",
+            "label": "Continue",
+            "on-click-action": {
+              "name": "data_exchange",
+              "payload": {
+                "selected_service": "${form.service_name}"
+              }
+            }
           }
         ]
       }
     },
     {
-      "id": "DEMO_SUMMARY",
-      "title": "Summary",
+      "id": "SUMMARY",
+      "title": "Demo Summary",
+      "terminal": true,
+      "success": true,
       "data": {
-        "message": "Thank you for selecting a service!"
+        "summary_arr": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "__example__": [
+            "Service: Yoga Sessions",
+            "Guide: Priya Sharma",
+            "Session: Morning Yoga - 7 AM",
+            "Date: Oct 15, 2025",
+            "Duration: 60 mins",
+            "Price: INR 499",
+            "Availability: Every Monday & Wednesday",
+            "Payment Link: [Click Here](https://rzp.io/l/DemoYoga)"
+          ]
+        },
+        "selections": {
+          "type": "object",
+          "properties": {
+            "Service": {
+              "type": "string"
+            },
+            "Guide": {
+              "type": "string"
+            },
+            "Session": {
+              "type": "string"
+            },
+            "Date": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "Duration": {
+              "type": "string"
+            },
+            "Price": {
+              "type": "string"
+            },
+            "Availability": {
+              "type": "string"
+            },
+            "Payment Link": {
+              "type": "string"
+            }
+          },
+          "__example__": {
+            "Service": "Yoga Sessions",
+            "Guide": "Priya Sharma",
+            "Session": "Morning Yoga - 7 AM",
+            "Date": "2025-10-15",
+            "Duration": "60 mins",
+            "Price": "INR 499",
+            "Availability": "Every Monday & Wednesday",
+            "Payment Link": "[Click Here](https://rzp.io/l/DemoYoga)"
+          }
+        }
       },
       "layout": {
-        "type": "text",
-        "text": "Your selection has been recorded."
+        "type": "SingleColumnLayout",
+        "children": [
+          {
+            "type": "RichText",
+            "text": "${data.summary_arr}"
+          },
+          {
+            "type": "Footer",
+            "label": "Submit",
+            "on-click-action": {
+              "name": "data_exchange",
+              "payload": {
+                "selected_service": "${screen.SERVICES.form.service_name}",
+                "selections": "${data.selections}"
+              }
+            }
+          }
+        ]
       }
     }
   ]
