@@ -1,0 +1,49 @@
+{
+  "version": "3.11",
+  "data_api_version": "3.0",
+  "routing_model": {
+    "START_SCREEN": "HOME_SCREEN"
+  },
+  "screens": [
+    {
+      "id": "DEMO_SERVICES",
+      "title": "Our Services",
+      "data": {
+        "service_list": [
+          "Consulting",
+          "Workshops",
+          "Training"
+        ]
+      },
+      "layout": {
+        "type": "single_select",
+        "label": "Choose a service",
+        "options": [
+          {
+            "label": "Consulting",
+            "value": "consulting"
+          },
+          {
+            "label": "Workshops",
+            "value": "workshops"
+          },
+          {
+            "label": "Training",
+            "value": "training"
+          }
+        ]
+      }
+    },
+    {
+      "id": "DEMO_SUMMARY",
+      "title": "Summary",
+      "data": {
+        "message": "Thank you for selecting a service!"
+      },
+      "layout": {
+        "type": "text",
+        "text": "Your selection has been recorded."
+      }
+    }
+  ]
+}

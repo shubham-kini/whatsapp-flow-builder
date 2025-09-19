@@ -1,0 +1,11 @@
+{
+  "id": "DEMO_SUMMARY",
+  "title": "Summary",
+  "data": {
+    "message": "Thank you for selecting a service!"
+  },
+  "layout": {
+    "type": "text",
+    "text": "Your selection has been recorded."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "DEMO_SERVICES",
+  "title": "Our Services",
+  "data": {
+    "service_list": ["Consulting", "Workshops", "Training"]
+  },
+  "layout": {
+    "type": "single_select",
+    "label": "Choose a service",
+    "options": [
+      { "label": "Consulting", "value": "consulting" },
+      { "label": "Workshops", "value": "workshops" },
+      { "label": "Training", "value": "training" }
+    ]
+  }
+}
